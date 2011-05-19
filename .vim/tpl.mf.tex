@@ -1,0 +1,37 @@
+#
+
+PREF = qwerty
+
+PICS = 
+#PICS = pic1.tex pic2.tex
+#   for pic1.fig&pic2.fig !!!
+
+all: ${PREF}.ps
+
+
+
+.SUFFIXES: .fig .tex .dvi .ps .lst .tiff .pdf
+
+.ps.pdf: $*.ps
+	cat $^ | gs -q -sDEVICE=pdfwrite -r200x200 -sPAPERSIZE=a4 -dNOPAUSE -dSAFER -sOutputFile=$@ -
+
+.ps.tiff: $*.ps
+	cat $^ | gs -q -sDEVICE=tiffpack -r400x400 -sPAPERSIZE=a4 -dNOPAUSE -dSAFER -sOutputFile=$@ -
+
+.fig.tex: $*.fig
+	fig2dev -L latex $*.fig $*.tex
+	rm -f transfig.tex
+
+.tex.dvi: $*.tex
+	latex $*
+
+.dvi.ps: $*.dvi
+	dvips -o $*.ps $*.dvi
+
+${PREF}.dvi: ${PREF}.tex ${PICS}
+	latex $*
+
+clean:
+	rm -f ${PICS} ${PREF}*.log ${PREF}.aux ${PREF}.dvi transfig.tex
+	rm -f ${PREF}.ps ${PREF}.pdf ${PREF}.tiff
+
