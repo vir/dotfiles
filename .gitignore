@@ -1,0 +1,22 @@
+# pics & videos
+*.xcf
+*.jpg
+*.png
+*.avi
+*.wmv
+*.mpg
+# archives
+*.gz
+*.bz2
+# temps
+*.log
+.viminfo
+*,v
+[a-zA-Z0-9]*
+tmp/*
+.cvspass
+.Xauthority
+.xsession-errors
+.ICEauthority
+
+
