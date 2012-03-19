@@ -23,6 +23,10 @@ set ruler		" show the cursor position all the time
 set fileencodings=utf-8,koi8-r,cp1251,latin-1
 set exrc secure         " enable per-directory .vimrc files and disable unsafe commands in local .vimrc files
 
+" Enable undo
+set undofile
+set undodir=/tmp
+
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
   " In text files, always limit the width of text to 78 characters
