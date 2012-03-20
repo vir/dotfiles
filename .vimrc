@@ -24,8 +24,10 @@ set fileencodings=utf-8,koi8-r,cp1251,latin-1
 set exrc secure         " enable per-directory .vimrc files and disable unsafe commands in local .vimrc files
 
 " Enable undo
-set undofile
-set undodir=/tmp
+if has("persistent_undo") " requires vim 7.3 at least
+  set undofile
+  set undodir=/tmp
+endif
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
