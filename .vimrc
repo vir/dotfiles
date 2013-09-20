@@ -23,6 +23,12 @@ set ruler		" show the cursor position all the time
 set fileencodings=utf-8,koi8-r,cp1251,latin-1
 set exrc secure         " enable per-directory .vimrc files and disable unsafe commands in local .vimrc files
 
+" Enable undo
+if has("persistent_undo") " requires vim 7.3 at least
+  set undofile
+  set undodir=/tmp
+endif
+
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
   " In text files, always limit the width of text to 78 characters
@@ -111,6 +117,7 @@ if has("autocmd")
   autocmd FileType perl  map <F2> <ESC>ggi#!/usr/bin/perl -w<CR><CR>
   autocmd FileType perl  map <F4> A<Delete><Enter><ESC>
   autocmd BufNewFile *.pl 0r ~/.vim/tpl.pl |$
+  autocmd BufNewFile *.pm 0r ~/.vim/tpl.pm |exe "0s#Package#".expand("%")."#"| 0s/\//::/g| 0s/\.pm//| normal 5j
 "  autocmd BufWritePre,FileWritePre *.pl :ks|1;/^# Last modified: /:normal f: lD:r!/bin/datekJ's
 "  autocmd BufWritePre,FileWritePre *.pl ks|call UpdateTimeStamp()|'s
   autocmd BufWritePre,FileWritePre *.pl ks|call LastMod()|'s

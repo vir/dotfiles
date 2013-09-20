@@ -26,7 +26,9 @@ if [ "$PS1" ]; then
 
     # GIT goodies
     #PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
-    PS1='\u@\h:\w$(__git_ps1 " (%s)")\$ '
+    #PS1='\u@\h:\w$(__git_ps1 " (%s)")\$ '
+    function __git_no_home_ps1() { if [ "$(git rev-parse --git-dir 2>/dev/null)" = "$HOME/.git" ]; then true; else __git_ps1 " (%s)"; fi }
+    PS1='\u@\h:\w$(__git_no_home_ps1)\$ '
 
     # If this is an xterm set the title to user@host:dir
     #case $TERM in
