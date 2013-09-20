@@ -42,6 +42,8 @@ if [ "$PS1" ]; then
     if [ -f /etc/bash_completion ]; then
       . /etc/bash_completion
     fi
+
+    test -z "$SSH_AGENT_PID" && eval `ssh-agent`
 fi
 
 export PATH=~/bin:$PATH
