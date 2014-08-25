@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use DBI;
 use warnings FATAL => 'uninitialized';
-use CGI qw/:all *table *ul *dl *div/;
+use CGI qw/:all -nosticky -no_xhtml *table *ul *dl *div/;
 use CGI::Carp 'fatalsToBrowser';
 
 binmode(STDOUT, ':utf8');
@@ -29,6 +29,10 @@ print start_html(
 		-src=>'style.css',
 		-code=>$css,
 	},
+#	-script=>[
+#		{ -type => 'text/javascript', -src => 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js' },
+#		{ -type => 'text/javascript', -code => $js },
+#	],
 	-encoding=>'UTF-8',
 );
 &main();
