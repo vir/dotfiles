@@ -9,8 +9,8 @@ if [ "$PS1" ]; then
     export HISTCONTROL=ignoredups
 
     # enable color support of ls and also add handy aliases
-    eval `dircolors -b`
-    alias ls='ls --color=auto'
+    test -f /usr/bin/dircolors && eval `dircolors -b`
+    #alias ls='ls --color=auto'
     #alias dir='ls --color=auto --format=vertical'
     #alias vdir='ls --color=auto --format=long'
 

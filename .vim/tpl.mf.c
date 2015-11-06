@@ -1,13 +1,15 @@
-# my makefile
+# Use "gmake" on BSD and "make" on Linux
 
 #include MKCONF
 
+NAME = xxx
 VERSION = 0.0.1
-TARNAME = proga-${VERSION}.tar.gz
-BINS = main
-#DLLS = main.so
-OBJS_MAIN = main.o
+TARNAME = ${NAME}-${VERSION}.tar.gz
+BINS = ${NAME}
+#DLLS = ext.so
+OBJS_MAIN = ${NAME}.o
 OBJS_ALL = ${OBJS_MAIN}
+PREFIX = /usr/local
 #INCLUDEDIR = -I./inc
 
 all: ${BINS} ${DLLS}
@@ -19,11 +21,11 @@ all: ${BINS} ${DLLS}
 
 .cxx.o:
 	g++ -Wall -pipe -c ${INCLUDEDIR} -DVERSION=${VERSION} -o $*.o $<
-        
+
 .o.so: $<
 	gcc -Wall -pipe -shared -nostartfiles -nostdlib -o $@ $^
 
-main: ${OBJS_MAIN}
+${NAME}: ${OBJS_MAIN}
 	gcc -o $@ $^
 #	gcc -rdynamic -ldl -lpthread -o $@ $^
 #	strip $@
@@ -35,13 +37,13 @@ clean:
 
 tgz: clean
 	rm -f ${TARNAME}
-	tar czf ${TARNAME} *
+	tar czf --exclude '*.o' ${TARNAME} *
 
-#install:
-#	install -d ${DIR_BINS}
-#	install -d ${DIR_LIBS}
-#	install -s -m 500 ${BINS} ${DIR_BINS}
-#	install    -m 500 ${DLLS} ${DIR_LIBS}
+install:
+	install -d ${DESTDIR}${PREFIX}/bin
+	install -s ${BINS} ${DESTDIR}${PREFIX}/bin
+#	install -d ${DESTDIR}${PREFIX}/lib
+#	install    ${DLLS} ${DESTDIR}${PREFIX}/lib
 
 .depend:
 	gcc -MM -MG *.c *.cxx >.depend
@@ -50,5 +52,5 @@ ifeq (.depend,$(wildcard .depend))
 include .depend
 endif
 
-
+# vim: ft=make
 
