@@ -163,6 +163,9 @@ if has("autocmd")
   autocmd BufWritePre,FileWritePre *.tex :ks|1;/^% Last modified: /:normal f: lD:r!/bin/datekJ's
  augroup END
 
+" gg=G  :-)
+ au FileType xml setlocal equalprg=xmllint\ --encode\ UTF-8\ --format\ --recover\ -\ 2>/dev/null
+
  augroup html
   au!
   autocmd FileType htm,html set formatoptions=tclt ai ignorecase infercase mps+=<:> textwidth=70
