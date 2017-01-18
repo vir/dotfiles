@@ -48,6 +48,7 @@ if [ "$PS1" ]; then
     test -z "$SSH_AGENT_PID" && eval `ssh-agent`
 fi
 
+export LESS="R" # allow colors in 'less'
 export DEBEMAIL=vir@ctm.ru
 export PATH=~/bin:$PATH
 export LANG="ru_RU.UTF-8" LC_MESSAGES=C LC_TIME=C
