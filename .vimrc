@@ -172,6 +172,11 @@ if has("autocmd")
   autocmd BufNewFile *.htm,*.html 0r ~/.vim/tpl.html |$|?title?:normal f>l
  augroup END
 
+ augroup yaml
+  autocmd!
+  autocmd FileType yaml  set showmatch shiftwidth=2 ts=8 sts=2 expandtab smartindent list listchars=eol:⏎,tab:>·,trail:~,extends:>,precedes:<,nbsp:␣
+ augroup END
+
  augroup makefile
   " [( FileType make )]
   autocmd BufNewFile Makefile,makefile call AskForMakefileType()|
