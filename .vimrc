@@ -70,6 +70,9 @@ nmap <F6> :set hls!<CR>
 " Switches numered lines on and off
 nmap <F5> :set nu!<CR>
 
+" Switches indentaion off/on
+set pastetoggle=<F2>
+
 " Insert #ifndef... headers into .h files
 " attention! (green) symbols below entered as Ctrl-v followed by Ctrl-r
 fun InsertIfndefs()
